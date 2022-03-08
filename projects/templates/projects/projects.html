@@ -1,0 +1,38 @@
+{% extends 'main.html' %} 
+
+{% block content %}
+
+<h1>Projects</h1>
+<h2>Name: {{ name }}</h2>
+{% if age > 45 %}
+<h3>{{ name }}'{{ age }} is older than 45</h3>
+{% elif age == 45 %}
+<h3>{{ name }}'{{ age }} is same 45</h3>
+{% else %}
+<h3>{{ name }}'{{ age }} is under 45</h3>
+{% endif %}
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for project in projects %}
+    <tr>
+      <td>{{ project.id }}</td>
+      <td>
+        {{ project.title }}
+        {% if project.topRated %} | <strong>topRated</strong>
+        {% endif %}
+      </td>
+      <td>{{ project.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
