@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'projects.apps.ProjectsConfig', 
+    'projects.apps.ProjectsConfig', #스타트앱 폴더 생기면 그 안에 app.py의 class명 삽입
 ]
 
 MIDDLEWARE = [

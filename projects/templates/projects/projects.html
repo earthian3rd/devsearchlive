@@ -1,6 +1,4 @@
-{% extends 'main.html' %} 
-
-{% block content %}
+{% extends 'main.html' %} {% block content %}
 
 <h1>Projects</h1>
 <h2>Name: {{ name }}</h2>
@@ -15,7 +13,6 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Title</th>
       <th>Description</th>
     </tr>
@@ -23,11 +20,8 @@
   <tbody>
     {% for project in projects %}
     <tr>
-      <td>{{ project.id }}</td>
-      <td>
-        {{ project.title }}
-        {% if project.topRated %} | <strong>topRated</strong>
-        {% endif %}
+      <td> <!--url을 urls.py에 있는 name값으로 만든다-->
+        <a href="{% url 'single-project' project.id %}">{{ project.title }} {% if project.topRated %} |<strong>topRated</strong> {% endif %}</a>
       </td>
       <td>{{ project.description }}</td>
     </tr>

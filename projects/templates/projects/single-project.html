@@ -2,6 +2,13 @@
 
 {% block content %}
 <h1>{{ projects.title }}</h1>
+{% for tag in tags %}  <!-- for tag in project.tags.all 도 가능-->
+<span style='font-style:italic'>{{ tag }}</span> |
+{% endfor %}
 <p>{{ projects.description }}</p>
-
+<hr>
+<h3>Reviews:</h3>
+{% for review in reviews %} <!--for review in project.review_set.all 로 views.py에서 정의 안하고 여기서 바로 부를 수 있다.-->
+<p>{{ review.body }}</p>
+{% endfor %}
 {% endblock content %}
