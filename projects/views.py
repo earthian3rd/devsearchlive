@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Project
+from .form import ProjectFrom
 
 # Create your views here.
 
@@ -37,3 +38,9 @@ def project(request, pk):
     reviews = projectObj.reviews.all() #models.py에 있는 related_name의 값으로 쉽게 불러온다
     context = {'projects': projectObj, 'tags': tags, 'reviews': reviews}
     return render(request, 'projects/single-project.html', context)
+
+def createProject(request):
+    form = ProjectFrom()
+    
+    context = {'form': form}
+    return render(request, 'projects/project-form.html', context)
