@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from multiprocessing import context
+from pdb import post_mortem
+from re import template
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Project
-from .form import ProjectFrom
+from .form import ProjectForm
 
 # Create your views here.
 
@@ -40,7 +43,45 @@ def project(request, pk):
     return render(request, 'projects/single-project.html', context)
 
 def createProject(request):
-    form = ProjectFrom()
+    form = ProjectForm()
     
+    if request.method == 'POST':
+        #print('form data:', request.POST)
+        #title = request.POST['title']
+        form = ProjectForm(request.POST) #form의 모든 것을 받아온다.
+        if form.is_valid():  #불러온 폼이 이상없다면 디비에 저장한다.
+            form.save()
+            return redirect('index')
+        
+        
     context = {'form': form}
     return render(request, 'projects/project-form.html', context)
+
+def updateProject(request, pk):
+    context = {}
+    template = 'projects/project-form.html'
+    
+    projectObj = Project.objects.get(id=pk) #수정하는 것이기 때문에 폼을 채우기 위해 id불러옴
+    form= ProjectForm(instance=projectObj)  #폼을 채운다.
+    
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=projectObj) #신규 게시물과 수정을 구분
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        
+    context['form'] = form #context = {'form': form}
+    return render(request, template, context) #신규작성폼과 같은 페이지를 사용
+
+def deleteProject(request, pk):
+    context = {}
+    template = 'projects/delete.html'
+    
+    projectObj = Project.objects.get(id=pk)
+    
+    if request.method == 'POST':
+        projectObj.delete()
+        return redirect('index')
+        
+    context['object'] = projectObj
+    return render(request, template, context)

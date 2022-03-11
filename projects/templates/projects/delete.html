@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>    <!-- Project의 모델의 리턴값은 타이틀이기 때문에 제목이 보인다-->
+    <a href="{% url 'index' %}">GO back</a>
+    <input type="submit" value="Delete" />
+</form>
+
+{% endblock content %}
+
+
+
