@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&^+-e=9@g($tq)g1zof5(6lx@sue_+0!23h24ydw$^m)&yp%54'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  #페이지 오류일 때 고치는 과정을 유저가 못보게 하기 위해 False로 바꿈
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'mydomain.com'] #여러개 추가 가능
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware', #디버그 폴스일때 업로드된 이미지 안보이는 오류 해결
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'devsearchlive.wsgi.application'
+
 
 
 # Database
@@ -119,7 +121,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/images/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'  #경로지정
+    #os.path.join(BASE_DIR, 'static')
+]
+
+MEDIA_ROOT = BASE_DIR / 'static/images'  #이미지파일 자동 저장 폴더 경로 지정
+STATIC_ROOT = BASE_DIR / 'staticfiles'  #디버그가 false일때 생기는 문제 해결
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

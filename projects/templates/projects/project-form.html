@@ -2,21 +2,32 @@
 
 {% block content %}
 
-<form method="POST" action="">
-    {%  csrf_token  %} <!--#악성코드 작성으로부터 보호하기 위해-->
+<!-- Main Section -->
+<main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href="#"><i class="im im-angle-left"></i></a>
+            <br>
 
-    <!--1. 각각 불러오기 {{ form.title.label }}{{ form.title }}-->
-    <!--2. for로 불러오기 
-    {% for field in form %}
-    <div>
-        {{ field.label }}
-        {{ field }}
+            <form class="form" method="POST" action="" enctype="multipart/form-data">
+                {%  csrf_token  %}
+
+                <!--{{ form.as_p }} >-->
+
+                {% for field in form  %}
+                <!-- Input:Text -->
+                <div class="form__field">
+                    <label for="formInput#text">{{field.label}}</label>
+                    {{field}}
+                </div>
+                {% endfor %}
+
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            </form>
+        </div>
     </div>
-    {% endfor %}-->
-    <!--3. form으로 불러오며 스타일 리셋으로 제거하기-->
-    {{ form.as_p }} 
-    <input type="submit" value="submit" />
-</form>
+</main>
+
 
 {% endblock content %}
 

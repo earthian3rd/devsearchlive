@@ -1,3 +1,4 @@
+from email.policy import default
 from operator import mod
 from turtle import title, update
 from django.db import models
@@ -18,7 +19,7 @@ class Project(models.Model):
     # owner =
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True) #null은 데이타베이스 / blank는 장고를 위한 빈칸허용
-    #freature_image = 
+    featured_image = models.ImageField(null=True, blank=True, default='default.jpg')
     demo_link = models.CharField(max_length=1000, null=True, blank=True)
     source_link = models.CharField(max_length=1000, null=True, blank=True)
     vote_total = models.IntegerField(default=0)
@@ -29,6 +30,15 @@ class Project(models.Model):
     
     def __str__(self):
         return self.title  #title을 게시물의 대표로 나타냄
+    
+    @property
+    def imageURL(self):  #이미지 업로드 파일 없을 때 오류 잡기
+        try:
+            img = self.featured_image.url
+        except:
+            img = ''
+        return img
+    
     
 #1tomany
 class Review(models.Model):

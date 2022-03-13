@@ -1,17 +1,33 @@
-<!DOCTYPE html>
+<!DOCTYPE html> {% load static %}
+<!--js,css,images 등 static 파일을 사용하기 위해 반드씨 먼저 써준다-->
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    {% include 'navbar.html' %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href='{% static "css/main.css" %}'
+    />
+    <!-- static폴더로 일단 이동해라 그리고 폴더 골라라 따라서 / 필요없음 -->
 
-    {% block content %}
-
-    {% endblock content %}
-
-</body>
+    <!-- Favicon -->
+   
+    <!-- Icon - IconMonster -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.iconmonstr.com/1.3.0/css/iconmonstr-iconic-font.min.css"
+    />
+    <!-- Mumble UI -->
+    <link rel="stylesheet" href="{% static 'uikit/styles/uikit.css' %}" />
+    <!-- Dev Search UI -->
+    <link rel="stylesheet" href="{% static 'css/app.css' %}" />
+    <!--<script src="main.js"></script>-->
+  </head>
+  <body>
+    {% include 'navbar.html' %} {% block content %} {% endblock content %}
+  </body>
 </html>

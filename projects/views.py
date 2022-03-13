@@ -48,7 +48,7 @@ def createProject(request):
     if request.method == 'POST':
         #print('form data:', request.POST)
         #title = request.POST['title']
-        form = ProjectForm(request.POST) #form의 모든 것을 받아온다.
+        form = ProjectForm(request.POST, request.FILES) #form의 모든 것을 받아온다.
         if form.is_valid():  #불러온 폼이 이상없다면 디비에 저장한다.
             form.save()
             return redirect('index')
@@ -62,10 +62,10 @@ def updateProject(request, pk):
     template = 'projects/project-form.html'
     
     projectObj = Project.objects.get(id=pk) #수정하는 것이기 때문에 폼을 채우기 위해 id불러옴
-    form= ProjectForm(instance=projectObj)  #폼을 채운다.
+    form = ProjectForm(instance=projectObj)  #폼을 채운다.
     
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=projectObj) #신규 게시물과 수정을 구분
+        form = ProjectForm(request.POST, request.FILES, instance=projectObj) #신규 게시물과 수정을 구분
         if form.is_valid():
             form.save()
             return redirect('index')
