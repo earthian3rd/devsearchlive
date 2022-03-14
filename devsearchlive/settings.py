@@ -58,7 +58,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'tamplates')   #tamplates 베이스 경로 지정해줌
+            os.path.join(BASE_DIR, 'templates')   #templates 베이스 경로 지정해줌
             ],
         'APP_DIRS': True,
         'OPTIONS': {
